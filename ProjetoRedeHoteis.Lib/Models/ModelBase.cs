@@ -1,3 +1,5 @@
+using ProjetoRedeHoteis.Lib.MyExceptions;
+
 namespace ProjetoRedeHoteis.Lib.Models
 {
     public class ModelBase
@@ -33,7 +35,16 @@ namespace ProjetoRedeHoteis.Lib.Models
         }
         public void SetDataUltimaAtualizacao(DateTime dataUltimaAtualizacao)
         {
+            ValidarDataUltimaAtualizacao(dataUltimaAtualizacao);
             DataUltimaAtualizacao = dataUltimaAtualizacao;
+        }
+        public void ValidarDataUltimaAtualizacao(DateTime dataUltimaAtualizacao)
+        {
+            if (dataUltimaAtualizacao > DataCadastro)
+            {
+                return;
+            }
+            throw new ValidacaoDadosException("Data da ultima atualização não pode ser anterior a data de cadastro!");
         }
     }
 }

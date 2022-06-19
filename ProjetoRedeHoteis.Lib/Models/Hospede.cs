@@ -1,3 +1,5 @@
+using ProjetoRedeHoteis.Lib.MyExceptions;
+
 namespace ProjetoRedeHoteis.Lib.Models
 {
     public class Hospede : ModelBase
@@ -32,6 +34,7 @@ namespace ProjetoRedeHoteis.Lib.Models
 
         public void SetTelefone(string telefone)
         {
+            ValidarTelefone(telefone);
             Telefone = telefone;
         }
         public string GetCpf()
@@ -41,6 +44,7 @@ namespace ProjetoRedeHoteis.Lib.Models
 
         public void SetCpf(string cpf)
         {
+            ValidarCpf(cpf);
             Cpf = cpf;
         }
         public string GetEmail()
@@ -50,6 +54,7 @@ namespace ProjetoRedeHoteis.Lib.Models
 
         public void SetEmail(string email)
         {
+            ValidarEmail(email);
             Email = email;
         }
         public DateOnly GetDataNascimento()
@@ -60,6 +65,30 @@ namespace ProjetoRedeHoteis.Lib.Models
         public void SetDataNascimento(DateOnly dataNascimento)
         {
             DataNascimento = dataNascimento;
+        }
+        public void ValidarTelefone(string telefone)
+        {
+            if (telefone.Length == 14)
+            {
+                return;
+            }
+            throw new ValidacaoDadosException("Número de telefone deve ter 14 caracteres!");
+        }
+        public void ValidarCpf(string cpf)
+        {
+            if (cpf.All(char.IsNumber))
+            {
+                return;
+            }
+            throw new ValidacaoDadosException("CPF deve conter apenas números!");
+        }
+        public void ValidarEmail(string email)
+        {
+            if (email.Contains("@"))
+            {
+                return;
+            }
+            throw new ValidacaoDadosException("Email deve conter @!");
         }
     }
 }

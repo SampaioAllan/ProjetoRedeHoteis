@@ -1,3 +1,5 @@
+using ProjetoRedeHoteis.Lib.MyExceptions;
+
 namespace ProjetoRedeHoteis.Lib.Models
 {
     public class CategoriaQuarto : ModelBase
@@ -41,6 +43,7 @@ namespace ProjetoRedeHoteis.Lib.Models
         }
         public void SetOcupacaoMaxima(int ocupacaoMaxima)
         {
+            ValidarOcupacaoMaxima(ocupacaoMaxima);
             OcupacaoMaxima = ocupacaoMaxima;
         }
         public int GetCamaCasal()
@@ -66,6 +69,15 @@ namespace ProjetoRedeHoteis.Lib.Models
         public void SetValor(double valor)
         {
             Valor = valor;
+        }
+        public void ValidarOcupacaoMaxima(int ocupacaoMaxima)
+        {
+            var capacidadeMax = ((CamaCasal * 2) + (CamaSolteiro * 1));
+            if (ocupacaoMaxima == capacidadeMax)
+            {
+                return;
+            }
+            throw new ValidacaoDadosException("Ocupação máxima não pode ser maior do que a quantidade de pessoas suportadas pelas camas!");
         }
     }
 }

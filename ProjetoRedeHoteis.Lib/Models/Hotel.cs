@@ -1,4 +1,6 @@
-﻿namespace ProjetoRedeHoteis.Lib.Models;
+﻿using ProjetoRedeHoteis.Lib.MyExceptions;
+
+namespace ProjetoRedeHoteis.Lib.Models;
 public class Hotel : ModelBase
 {
     private string Nome { get; set; }
@@ -60,6 +62,7 @@ public class Hotel : ModelBase
     }
     public void SetTelefone(string telefone)
     {
+        ValidarTelefone(telefone);
         Telefone = telefone;
     }
     public string GetEmail()
@@ -68,6 +71,7 @@ public class Hotel : ModelBase
     }
     public void SetEmail(string email)
     {
+        ValidarEmail(email);
         Email = email;
     }
     public DateTime GetHorarioCheckIn()
@@ -85,5 +89,21 @@ public class Hotel : ModelBase
     public void SetHorarioCheckOut(DateTime horarioCheckOut)
     {
         HorarioCheckOut = horarioCheckOut;
+    }
+    public void ValidarTelefone(string telefone)
+    {
+        if (telefone.Length == 14)
+        {
+            return;
+        }
+        throw new ValidacaoDadosException("Número de telefone deve ter 14 caracteres!");
+    }
+    public void ValidarEmail(string email)
+    {
+        if (email.Contains("@"))
+        {
+            return;
+        }
+        throw new ValidacaoDadosException("Email deve conter @!");
     }
 }

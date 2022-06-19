@@ -1,3 +1,5 @@
+using ProjetoRedeHoteis.Lib.MyExceptions;
+
 namespace ProjetoRedeHoteis.Lib.Models
 {
     public class Estadia : ModelBase
@@ -30,6 +32,7 @@ namespace ProjetoRedeHoteis.Lib.Models
         }
         public void SetDataSaida(DateOnly dataSaida)
         {
+            ValidarDataSaida(dataSaida);
             DataSaida = dataSaida;
         }
         public double GetValorTotal()
@@ -55,6 +58,14 @@ namespace ProjetoRedeHoteis.Lib.Models
         public void SetIdQuarto(int idQuarto)
         {
             IdQuarto = idQuarto;
+        }
+        public void ValidarDataSaida(DateOnly dataSaida)
+        {
+            if (dataSaida > DataEntrada)
+            {
+                return;
+            }
+            throw new ValidacaoDadosException("Data de saída deve ser posterior a data de entrada!");
         }
     }
 }
