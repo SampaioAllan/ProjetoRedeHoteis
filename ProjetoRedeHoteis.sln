@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoRedeHoteis.Lib", "Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoRedeHoteis.Web", "ProjetoRedeHoteis.Web\ProjetoRedeHoteis.Web.csproj", "{75F39357-4A33-4235-8C48-7663C048C61E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoRedeHoteis.TesteUnitario", "ProjetoRedeHoteis.TesteUnitario\ProjetoRedeHoteis.TesteUnitario.csproj", "{1A3CCDB3-5E2A-414D-B269-E6B46FB1BD25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{75F39357-4A33-4235-8C48-7663C048C61E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75F39357-4A33-4235-8C48-7663C048C61E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75F39357-4A33-4235-8C48-7663C048C61E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A3CCDB3-5E2A-414D-B269-E6B46FB1BD25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A3CCDB3-5E2A-414D-B269-E6B46FB1BD25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A3CCDB3-5E2A-414D-B269-E6B46FB1BD25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A3CCDB3-5E2A-414D-B269-E6B46FB1BD25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
