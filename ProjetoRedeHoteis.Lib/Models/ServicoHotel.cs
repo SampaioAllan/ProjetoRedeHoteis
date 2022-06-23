@@ -4,6 +4,8 @@ namespace ProjetoRedeHoteis.Lib.Models
     {
         private int IdServico { get; set; }
         private int IdHotel { get; set; }
+        public virtual Servico Servico { get; set; }
+        public virtual Hotel Hotel { get; set; }
         public ServicoHotel(int id, DateTime dataCadastro, DateTime dataUltimaAtualizacao, int idServico, int idHotel) : base
                            (id, dataCadastro, dataUltimaAtualizacao)
         {

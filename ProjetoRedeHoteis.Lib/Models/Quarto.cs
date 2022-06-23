@@ -6,6 +6,9 @@ namespace ProjetoRedeHoteis.Lib.Models
         private int Andar { get; set; }
         private int IdCategoria { get; set; }
         private int IdHotel { get; set; }
+        public virtual CategoriaQuarto Categoria { get; set; }
+        public virtual Hotel Hotel { get; set; }
+        public virtual List<Estadia> Estadias { get; set; }
         public Quarto(int id, DateTime dataCadastro, DateTime dataUltimaAtualizacao, int numero, int andar, int idCategoria,
                       int idHotel) : base(id, dataCadastro, dataUltimaAtualizacao)
         {

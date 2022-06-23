@@ -11,6 +11,8 @@ public class Hotel : ModelBase
     private string Email { get; set; }
     private DateTime HorarioCheckIn { get; set; }
     private DateTime HorarioCheckOut { get; set; }
+    public virtual List<Quarto> Quartos { get; set; }
+    public virtual List<ServicoHotel> ServicosHoteis { get; set; }
     public Hotel(int id, DateTime dataCadastro, DateTime dataUltimaAtualizacao, string nome, string endereco, string cep,
                  string descricao, string telefone, string email, DateTime horarioCheckIn, DateTime horarioCheckOut) : base(
                  id, dataCadastro, dataUltimaAtualizacao)

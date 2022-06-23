@@ -4,6 +4,8 @@ namespace ProjetoRedeHoteis.Lib.Models
     {
         private int IdEstadia { get; set; }
         private int IdHospede { get; set; }
+        public virtual Estadia Estadia { get; set; }
+        public virtual Hospede Hospede { get; set; }
         public EstadiaHospede(int id, DateTime dataCadastro, DateTime dataUltimaAtualizacao, int idEstadia, int idHospede) : base
                              (id, dataCadastro, dataUltimaAtualizacao)
         {

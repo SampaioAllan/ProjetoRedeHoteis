@@ -9,6 +9,9 @@ namespace ProjetoRedeHoteis.Lib.Models
         private double ValorTotal { get; set; }
         private int IdResponsavel { get; set; }
         private int IdQuarto { get; set; }
+        public virtual List<EstadiaHospede> EstadiasHospedes { get; set; }
+        public virtual Quarto Quarto { get; set; }
+        public virtual Hospede Responsavel { get; set; }
         public Estadia(int id, DateTime dataCadastro, DateTime dataUltimaAtualizacao, DateOnly dataEntrada, DateOnly dataSaida,
                        double valorTotal, int idResponsavel, int idQuarto) : base(id, dataCadastro, dataUltimaAtualizacao)
         {
