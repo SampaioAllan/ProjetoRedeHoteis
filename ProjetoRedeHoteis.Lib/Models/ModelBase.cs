@@ -40,7 +40,7 @@ namespace ProjetoRedeHoteis.Lib.Models
         }
         public void ValidarDataUltimaAtualizacao(DateTime dataUltimaAtualizacao)
         {
-            if (dataUltimaAtualizacao > DataCadastro)
+            if (dataUltimaAtualizacao >= DataCadastro)
             {
                 return;
             }

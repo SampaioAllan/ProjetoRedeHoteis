@@ -17,9 +17,9 @@ namespace ProjetoRedeHoteis.Lib.Models
         {
             SetNome(nome);
             SetDescricao(descricao);
-            SetOcupacaoMaxima(ocupacaoMaxima);
             SetCamaCasal(camaCasal);
             SetCamaSolteiro(camaSolteiro);
+            SetOcupacaoMaxima(ocupacaoMaxima);
             SetValor(valor);
         }
         public string GetNome()

@@ -8,7 +8,7 @@ namespace ProjetoRedeHoteis.Web.Controllers
     [Route("[controller]")]
     public class HotelController : ControllerBase
     {
-        public static List<Hotel> Hoteis;
+        public static List<Hotel> Hoteis { get; set; } = new List<Hotel>();
 
         [HttpPost("Adicionar CategoriaQuarto")]
         public IActionResult AddHotel(HotelDTO hotel)
