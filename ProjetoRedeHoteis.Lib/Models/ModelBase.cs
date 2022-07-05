@@ -4,9 +4,13 @@ namespace ProjetoRedeHoteis.Lib.Models
 {
     public class ModelBase
     {
-        private int Id { get; set; }
-        private DateTime DataCadastro { get; set; }
-        private DateTime DataUltimaAtualizacao { get; set; }
+        public int Id { get; private set; }
+        public DateTime DataCadastroTabela { get; private set; }
+        public DateTime DataUltimaAtualizacaoTabela { get; private set; }
+        protected ModelBase()
+        {
+            
+        }
         public ModelBase(int id, DateTime dataCadastro, DateTime dataUltimaAtualizacao)
         {
             SetId(id);
@@ -23,24 +27,24 @@ namespace ProjetoRedeHoteis.Lib.Models
         }
         public DateTime GetDataCadastro()
         {
-            return DataCadastro;
+            return DataCadastroTabela;
         }
         public void SetDataCadastro(DateTime dataCadastro)
         {
-            DataCadastro = dataCadastro;
+            DataCadastroTabela = dataCadastro;
         }
         public DateTime GetDataUltimaAtualizacao()
         {
-            return DataUltimaAtualizacao;
+            return DataUltimaAtualizacaoTabela;
         }
         public void SetDataUltimaAtualizacao(DateTime dataUltimaAtualizacao)
         {
             ValidarDataUltimaAtualizacao(dataUltimaAtualizacao);
-            DataUltimaAtualizacao = dataUltimaAtualizacao;
+            DataUltimaAtualizacaoTabela = dataUltimaAtualizacao;
         }
         public void ValidarDataUltimaAtualizacao(DateTime dataUltimaAtualizacao)
         {
-            if (dataUltimaAtualizacao >= DataCadastro)
+            if (dataUltimaAtualizacao >= DataCadastroTabela)
             {
                 return;
             }

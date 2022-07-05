@@ -4,13 +4,17 @@ namespace ProjetoRedeHoteis.Lib.Models
 {
     public class CategoriaQuarto : ModelBase
     {
-        private string Nome { get; set; }
-        private string Descricao { get; set; }
-        private int OcupacaoMaxima { get; set; }
-        private int CamaCasal { get; set; }
-        private int CamaSolteiro { get; set; }
-        private double Valor { get; set; }
+        public string Nome { get; private set; }
+        public string Descricao { get; private set; }
+        public int OcupacaoMaxima { get; private set; }
+        public int CamaCasal { get; private set; }
+        public int CamaSolteiro { get; private set; }
+        public double Valor { get; private set; }
         public virtual List<Quarto> Quartos { get; set; }
+        protected CategoriaQuarto()
+        {
+            
+        }
         public CategoriaQuarto(int id, DateTime dataCadastro, DateTime dataUltimaAtualizacao, string nome, string descricao,
                                int ocupacaoMaxima, int camaCasal, int camaSolteiro, double valor) : base(id, dataCadastro,
                                dataUltimaAtualizacao)

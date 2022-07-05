@@ -4,13 +4,17 @@ namespace ProjetoRedeHoteis.Lib.Models
 {
     public class Hospede : ModelBase
     {
-        private string Nome { get; set; }
-        private string Telefone { get; set; }
-        private string Cpf { get; set; }
-        private string Email { get; set; }
-        private DateOnly DataNascimento { get; set; }
+        public string Nome { get; private set; }
+        public string Telefone { get; private set; }
+        public string Cpf { get; private set; }
+        public string Email { get; private set; }
+        public DateOnly DataNascimento { get; private set; }
         public virtual List<EstadiaHospede> EstadiasHospedes { get; set; }
         public virtual List<Estadia> Estadias { get; set; }
+        protected Hospede()
+        {
+            
+        }
         public Hospede(int id, DateTime dataCadastro, DateTime dataUltimaAtualizacao, string nome, string telefone, string cpf,
                        string email, DateOnly dataNascimento) : base(id, dataCadastro, dataUltimaAtualizacao)
         {

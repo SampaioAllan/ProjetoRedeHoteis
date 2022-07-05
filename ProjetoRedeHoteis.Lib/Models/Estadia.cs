@@ -4,14 +4,18 @@ namespace ProjetoRedeHoteis.Lib.Models
 {
     public class Estadia : ModelBase
     {
-        private DateOnly DataEntrada { get; set; }
-        private DateOnly DataSaida { get; set; }
-        private double ValorTotal { get; set; }
-        private int IdResponsavel { get; set; }
-        private int IdQuarto { get; set; }
+        public DateOnly DataEntrada { get; private set; }
+        public DateOnly DataSaida { get; private set; }
+        public double ValorTotal { get; private set; }
+        public int IdResponsavel { get; private set; }
+        public int IdQuarto { get; private set; }
         public virtual List<EstadiaHospede> EstadiasHospedes { get; set; }
         public virtual Quarto Quarto { get; set; }
         public virtual Hospede Responsavel { get; set; }
+        protected Estadia()
+        {
+            
+        }
         public Estadia(int id, DateTime dataCadastro, DateTime dataUltimaAtualizacao, DateOnly dataEntrada, DateOnly dataSaida,
                        double valorTotal, int idResponsavel, int idQuarto) : base(id, dataCadastro, dataUltimaAtualizacao)
         {

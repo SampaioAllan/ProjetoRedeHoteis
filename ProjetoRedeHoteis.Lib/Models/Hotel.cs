@@ -3,16 +3,20 @@
 namespace ProjetoRedeHoteis.Lib.Models;
 public class Hotel : ModelBase
 {
-    private string Nome { get; set; }
-    private string Endereco { get; set; }
-    private string Cep { get; set; }
-    private string Descricao { get; set; }
-    private string Telefone { get; set; }
-    private string Email { get; set; }
-    private DateTime HorarioCheckIn { get; set; }
-    private DateTime HorarioCheckOut { get; set; }
+    public string Nome { get; private set; }
+    public string Endereco { get; private set; }
+    public string Cep { get; private set; }
+    public string Descricao { get; private set; }
+    public string Telefone { get; private set; }
+    public string Email { get; private set; }
+    public DateTime HorarioCheckIn { get; private set; }
+    public DateTime HorarioCheckOut { get; private set; }
     public virtual List<Quarto> Quartos { get; set; }
     public virtual List<ServicoHotel> ServicosHoteis { get; set; }
+    protected Hotel()
+    {
+        
+    }
     public Hotel(int id, DateTime dataCadastro, DateTime dataUltimaAtualizacao, string nome, string endereco, string cep,
                  string descricao, string telefone, string email, DateTime horarioCheckIn, DateTime horarioCheckOut) : base(
                  id, dataCadastro, dataUltimaAtualizacao)
