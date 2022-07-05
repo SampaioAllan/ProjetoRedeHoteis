@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ProjetoRedeHoteis.Lib.Data.Repositorios;
 using ProjetoRedeHoteis.Lib.Models;
 using ProjetoRedeHoteis.Web.DTOs;
 
@@ -8,30 +9,34 @@ namespace ProjetoRedeHoteis.Web.Controllers
     [Route("[controller]")]
     public class ServicoController : ControllerBase
     {
-        public static List<Servico> Servicos { get; set; } = new List<Servico>();
+        private readonly ServicoRepositorio _repositorio;
+        public ServicoController(ServicoRepositorio repositorio)
+        {
+            _repositorio = repositorio;
+        }
 
         [HttpPost("Adicionar Servico")]
         public IActionResult AddServico(ServicoDTO servico)
         {
-            var servicoNovo = new Servico(servico.Id, servico.DataCadastro, servico.DataUltimaAtualizacao, servico.Nome);
-            Servicos.Add(servicoNovo);
-            return Ok(Servicos);
+            var servicoNovo = new Servico(servico.Id, servico.DataCadastroTabela, servico.DataUltimaAtualizacaoTabela, servico.Nome);
+            _repositorio.Adicionar(servicoNovo);
+            return Ok();
         }
         [HttpGet("Buscar Servicos")]
         public IActionResult GetServicos()
         {
-            return Ok(Servicos);
+            return Ok(_repositorio.BuscarTodos());
         }
         [HttpGet("Buscar Servico por Id")]
         public IActionResult GetServicoPorId(int idServico)
         {
-            return Ok(Servicos.Find(x => x.GetId() == idServico));
+            return Ok(_repositorio.BuscarPorId(idServico));
         }
         [HttpDelete("Deletar Servico por Id")]
         public IActionResult DeleteServicoPorId(int idServico)
         {
-            Servicos.RemoveAll(x => x.GetId() == idServico);
-            return Ok(Servicos);
+            _repositorio.DeletarItemDesejado(idServico);
+            return Ok();
         }
     }
 }

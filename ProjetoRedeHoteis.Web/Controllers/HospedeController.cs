@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ProjetoRedeHoteis.Lib.Data.Repositorios;
 using ProjetoRedeHoteis.Lib.Models;
 using ProjetoRedeHoteis.Web.DTOs;
 
@@ -8,31 +9,35 @@ namespace ProjetoRedeHoteis.Web.Controllers
     [Route("[controller]")]
     public class HospedeController : ControllerBase
     {
-        public static List<Hospede> Hospedes { get; set; } = new List<Hospede>();
+        private readonly HospedeRepositorio _repositorio;
+        public HospedeController(HospedeRepositorio repositorio)
+        {
+            _repositorio = repositorio;
+        }
 
         [HttpPost("Adicionar Hospede")]
         public IActionResult AddHospede(HospedeDTO hospede)
         {
-            var hospedeNovo = new Hospede(hospede.Id, hospede.DataCadastro, hospede.DataUltimaAtualizacao, hospede.Nome, hospede.Telefone,
+            var hospedeNovo = new Hospede(hospede.Id, hospede.DataCadastroTabela, hospede.DataUltimaAtualizacaoTabela, hospede.Nome, hospede.Telefone,
                                           hospede.Cpf, hospede.Email, hospede.DataNascimento);
-            Hospedes.Add(hospedeNovo);
-            return Ok(Hospedes);
+            _repositorio.Adicionar(hospedeNovo);
+            return Ok();
         }
         [HttpGet("Buscar Hospedes")]
         public IActionResult GetHospedes()
         {
-            return Ok(Hospedes);
+            return Ok(_repositorio.BuscarTodos());
         }
         [HttpGet("Buscar Hospede por Id")]
         public IActionResult GetHospedePorId(int idHospede)
         {
-            return Ok(Hospedes.Find(x => x.GetId() == idHospede));
+            return Ok(_repositorio.BuscarPorId(idHospede));
         }
         [HttpDelete("Deletar Hospede por Id")]
         public IActionResult DeleteHospedePorId(int idHospede)
         {
-            Hospedes.RemoveAll(x => x.GetId() == idHospede);
-            return Ok(Hospedes);
+            _repositorio.DeletarItemDesejado(idHospede);
+            return Ok();
         }
     }
 }

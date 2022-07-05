@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ProjetoRedeHoteis.Lib.Data.Repositorios;
 using ProjetoRedeHoteis.Lib.Models;
 using ProjetoRedeHoteis.Web.DTOs;
 
@@ -8,31 +9,35 @@ namespace ProjetoRedeHoteis.Web.Controllers
     [Route("[controller]")]
     public class EstadiaHospedeController : ControllerBase
     {
-        public static List<EstadiaHospede> EstadiasHospedes { get; set; } = new List<EstadiaHospede>();
+        private readonly EstadiaHospedeRepositorio _repositorio;
+        public EstadiaHospedeController(EstadiaHospedeRepositorio repositorio)
+        {
+            _repositorio = repositorio;
+        }
 
         [HttpPost("Adicionar EstadiaHospede")]
         public IActionResult AddEstadiaHospede(EstadiaHospedeDTO estadiaHospede)
         {
-            var estadiaHospedeNova = new EstadiaHospede(estadiaHospede.Id, estadiaHospede.DataCadastro, estadiaHospede.DataUltimaAtualizacao,
+            var estadiaHospedeNova = new EstadiaHospede(estadiaHospede.Id, estadiaHospede.DataCadastroTabela, estadiaHospede.DataUltimaAtualizacaoTabela,
                                                         estadiaHospede.IdEstadia, estadiaHospede.IdHospede);
-            EstadiasHospedes.Add(estadiaHospedeNova);
-            return Ok(EstadiasHospedes);
+            _repositorio.Adicionar(estadiaHospedeNova);
+            return Ok();
         }
         [HttpGet("Buscar EstadiasHospedes")]
         public IActionResult GetEstadiasHospedes()
         {
-            return Ok(EstadiasHospedes);
+            return Ok(_repositorio.BuscarTodos());
         }
         [HttpGet("Buscar EstadiaHospede por Id")]
-        public IActionResult GetEstadiaHospedePorId(int IdEstadiaHospede)
+        public IActionResult GetEstadiaHospedePorId(int idEstadiaHospede)
         {
-            return Ok(EstadiasHospedes.Find(x => x.GetId() == IdEstadiaHospede));
+            return Ok(_repositorio.BuscarPorId(idEstadiaHospede));
         }
         [HttpDelete("Deletar EstadiaHospede por Id")]
         public IActionResult DeleteEstadiaHospedePorId(int idEstadiaHospede)
         {
-            EstadiasHospedes.RemoveAll(x => x.GetId() == idEstadiaHospede);
-            return Ok(EstadiasHospedes);
+            _repositorio.DeletarItemDesejado(idEstadiaHospede);
+            return Ok();
         }
     }
 }

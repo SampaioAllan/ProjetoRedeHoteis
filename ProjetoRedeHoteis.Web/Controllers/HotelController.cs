@@ -1,6 +1,9 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
+using ProjetoRedeHoteis.Lib.Data.Repositorios;
 using ProjetoRedeHoteis.Lib.Models;
 using ProjetoRedeHoteis.Web.DTOs;
+using ProjetoRedeHoteis.Web.DTOs.RespostaHTTP;
 
 namespace ProjetoRedeHoteis.Web.Controllers
 {
@@ -8,32 +11,47 @@ namespace ProjetoRedeHoteis.Web.Controllers
     [Route("[controller]")]
     public class HotelController : ControllerBase
     {
-        public static List<Hotel> Hoteis { get; set; } = new List<Hotel>();
+        private readonly HotelRepositorio _repositorio;
+        public HotelController(HotelRepositorio repositorio)
+        {
+            _repositorio = repositorio;
+        }
 
         [HttpPost("Adicionar CategoriaQuarto")]
         public IActionResult AddHotel(HotelDTO hotel)
         {
-            var hotelNovo = new Hotel(hotel.Id, hotel.DataCadastro, hotel.DataUltimaAtualizacao, hotel.Nome, hotel.Endereco,
+            var hotelNovo = new Hotel(hotel.Id, hotel.DataCadastroTabela, hotel.DataUltimaAtualizacaoTabela, hotel.Nome, hotel.Endereco,
                                       hotel.Cep, hotel.Descricao, hotel.Telefone, hotel.Email, hotel.HorarioCheckIn,
                                       hotel.HorarioCheckOut);
-            Hoteis.Add(hotelNovo);
-            return Ok(Hoteis);
+            _repositorio.Adicionar(hotelNovo);
+            return Ok();
         }
         [HttpGet("Buscar Hoteis")]
         public IActionResult GetHoteis()
         {
-            return Ok(Hoteis);
+            return Ok(_repositorio.BuscarTodos());
         }
         [HttpGet("Buscar Hotel por Id")]
         public IActionResult GetHotelPorId(int idHotel)
         {
-            return Ok(Hoteis.Find(x => x.GetId() == idHotel));
+            return Ok(_repositorio.BuscarPorId(idHotel));
         }
         [HttpDelete("Deletar Hotel por Id")]
         public IActionResult DeleteHotelPorId(int idHotel)
         {
-            Hoteis.RemoveAll(x => x.GetId() == idHotel);
-            return Ok(Hoteis);
+            _repositorio.DeletarItemDesejado(idHotel);
+            return Ok();
+        }
+        [HttpGet("CEP")]
+        public async Task<IActionResult> GetCEP(string cep)
+        {
+            var client = new HttpClient();
+            var retorno = await client.GetAsync($"https://viacep.com.br/ws/{cep}/json/");
+            var resposta = await retorno.Content.ReadAsStringAsync();
+
+            var respostaEmObjeto = JsonSerializer.Deserialize<ViaCepRespostaHTTP>(resposta);
+            //return Ok(resposta);
+            return Ok(respostaEmObjeto.localidade);
         }
     }
 }
