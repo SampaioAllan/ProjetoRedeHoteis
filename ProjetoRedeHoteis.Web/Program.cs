@@ -1,6 +1,7 @@
 using ProjetoRedeHoteis.Lib.Data;
 using Microsoft.EntityFrameworkCore;
 using ProjetoRedeHoteis.Lib.Data.Repositorios;
+using ProjetoRedeHoteis.Lib.Data.Repositorios.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,14 +15,14 @@ builder.Services.AddDbContext<RedeHoteisContext>(
 builder.Services.AddControllers()
                 .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =
 Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-builder.Services.AddScoped<CategoriaQuartoRepositorio>();
-builder.Services.AddScoped<EstadiaHospedeRepositorio>();
-builder.Services.AddScoped<EstadiaRepositorio>();
-builder.Services.AddScoped<HospedeRepositorio>();
-builder.Services.AddScoped<HotelRepositorio>();
-builder.Services.AddScoped<QuartoRepositorio>();
-builder.Services.AddScoped<ServicoHotelRepositorio>();
-builder.Services.AddScoped<ServicoRepositorio>();
+builder.Services.AddScoped<ICategoriaQuartoRepositorio, CategoriaQuartoRepositorio>();
+builder.Services.AddScoped<IEstadiaHospedeRepositorio, EstadiaHospedeRepositorio>();
+builder.Services.AddScoped<IEstadiaRepositorio, EstadiaRepositorio>();
+builder.Services.AddScoped<IHospedeRepositorio, HospedeRepositorio>();
+builder.Services.AddScoped<IHotelRepositorio, HotelRepositorio>();
+builder.Services.AddScoped<IQuartoRepositorio, QuartoRepositorio>();
+builder.Services.AddScoped<IServicoHotelRepositorio, ServicoHotelRepositorio>();
+builder.Services.AddScoped<IServicoRepositorio, ServicoRepositorio>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
