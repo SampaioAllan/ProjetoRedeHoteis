@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using ProjetoRedeHoteis.Lib.Data.Repositorios;
+using ProjetoRedeHoteis.Lib.Data.Repositorios.Interfaces;
 using ProjetoRedeHoteis.Lib.Models;
 using ProjetoRedeHoteis.Web.DTOs;
 
@@ -9,8 +9,8 @@ namespace ProjetoRedeHoteis.Web.Controllers
     [Route("[controller]")]
     public class EstadiaController : ControllerBase
     {
-        private readonly EstadiaRepositorio _repositorio;
-        public EstadiaController(EstadiaRepositorio repositorio)
+        private readonly IEstadiaRepositorio _repositorio;
+        public EstadiaController(IEstadiaRepositorio repositorio)
         {
             _repositorio = repositorio;
         }
